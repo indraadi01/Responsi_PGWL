@@ -60,7 +60,7 @@ class PointController extends Controller
             ],
             [
                 'remark.required' => 'Remark is required',
-                'lcode.required' => 'LCode is required',
+                'lcode.required' => 'Lcode is required',
                 'geom.required' => 'Location is required'
             ]
         );

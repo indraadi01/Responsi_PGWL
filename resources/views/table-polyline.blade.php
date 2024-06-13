@@ -14,7 +14,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Image</th>
-                <th>Shape Length</th>
+                <th>Shape Length (m&sup2)</th>
                 <th>Created at</th>
                 <th>Updated at</th>
 

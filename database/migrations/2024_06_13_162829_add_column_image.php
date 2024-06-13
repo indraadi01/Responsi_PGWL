@@ -9,22 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+     // menambahkan kolom tabel
     public function up(): void
     {
-        //add column image
-        Schema::table('JalanKota', function (Blueprint $table) {
-            $table->string('created_at')->nullable();
+        Schema::table('MergePL', function (Blueprint $table) {$table->string('image')->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
      */
+
+     //fungsi down balikin migrasi/rollback
     public function down(): void
     {
-         // drop column image
-         Schema::table('JalanKota', function (Blueprint $table) {
-            $table->string('created_at')->nullable();
+        //drop column table
+        Schema::table('MergePL', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 };

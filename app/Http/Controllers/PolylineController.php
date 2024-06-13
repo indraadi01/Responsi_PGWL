@@ -23,8 +23,8 @@ class PolylineController extends Controller
                 'geometry' => json_decode($p->geom),
                 'properties' => [
                     'id' => $p->id,
-                    'name' => $p->remark,
-                    'description' => $p->lcode,
+                    'remark' => $p->remark,
+                    'lcode' => $p->lcode,
                     'image' => $p->image,
                     'shape_leng' => $p->shape_leng,
                     'created_at' => $p->created_at,
@@ -60,8 +60,8 @@ class PolylineController extends Controller
             'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
         ],
         [
-            'name.required' => 'Name is required',
-            'lcode.required' => 'LCode is required',
+            'remark.required' => 'Name is required',
+            'lcode.required' => 'Lcode is required',
             'geom.required' => 'Location is required',
             'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
             'image.max' => 'The image may not be greater than 10MB.'

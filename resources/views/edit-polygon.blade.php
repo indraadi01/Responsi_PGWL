@@ -34,13 +34,12 @@
                         @csrf
                         @method('PATCH')
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Fill poit name">
+                            <label for="remark" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="remark" name="remark" value="{{ $polygons->remark }}" placeholder="Fill polygon name">
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            <label for="lcode" class="form-label">Description</label>
+                            <textarea class="form-control" id="lcode" name="lcode" rows="3">{{ $polygons->lcode }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
@@ -88,7 +87,7 @@
         var drawControl = new L.Control.Draw({
             draw: {
                 position: 'topleft',
-                Polygon: false,
+                polyline: false,
                 polygon: false,
                 rectangle: false,
                 circle: false,
@@ -112,8 +111,8 @@
 
                 var wkt = Terraformer.geojsonToWKT(geojson.geometry);
             // console.log(geojson); Mendebug keluaran data
-                $('#name').val(layer.feature.properties.name);
-                $('#description').val(layer.feature.properties.description);
+                $('#remark').val(layer.feature.properties.name);
+                $('#lcode').val(layer.feature.properties.description);
                 $('#geom_Polygon').val(wkt);
                 $('#image_old').val(layer.feature.properties.image);
                 $('#preview-image-Polygon').attr('src', '{{ asset('storage/images/') }}/' + layer.feature.properties.image);
@@ -134,7 +133,6 @@
                     "Description: " + feature.properties.description + "<br>" +
                     "Photo: <br> <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='' alt='...' width='200'>";
-
                     ;
                 layer.on({
                     click: function(e) {

@@ -14,7 +14,9 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Image</th>
+                <th>Width Area (sq m&sup2)</th>
                 <th>Created at</th>
+                <th>Updated at</th>
             </tr>
         </thead>
         </tbody>
@@ -26,12 +28,13 @@
             @endphp
             <tr>
                 <td>{{ $no++ }}</td>
-                <td>{{ $p->name }}</td>
-                <td>{{ $p->description }}</td>
+                <td>{{ $p->remark }}</td>
+                <td>{{ $p->lcode }}</td>
                 <td>
                     <img src="{{ asset('storage/images/' . $p->image) }}" alt="" width="200">
                 </td>
-                <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }}</td>
+                <td>{{ $p->shape_area }}</td>
+                {{-- <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }}</td> --}}
             </tr>
         @endforeach
         </tbody>

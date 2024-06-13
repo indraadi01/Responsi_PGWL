@@ -24,6 +24,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/',[MapController::class, 'index'])->name('index');
 Route::get('/table',[MapController::class, 'table'])->name('table');
+Route::get('/landing',[LandingController::class, 'landing'])->name('landing');
 
 //Create Point
 Route::post('/store-point',[PointController::class, 'store'])->name('store-point');
@@ -50,13 +51,6 @@ Route::get('/edit-polygon/{id}', [PolygonController::class, 'edit'])->name('edit
 //Update Polygon
 Route::patch('/update-polygon/{id}', [PolygonController::class, 'update'])->name('update-polygon');
 //CreateLanduse
-Route::post('/store-landuse',[LandUseController::class, 'store'])->name('store-landuse');
-//Delete Landuse
-Route::delete('delete-landuse/{id}', [LandUseController::class, 'destroy'])->name('delete-landuse');
-//Edit Landuse
-Route::get('/edit-landuse/{id}', [LandUseController::class, 'edit'])->name('edit-landuse');
-//Update Landuse
-Route::patch('/update-landuse/{id}', [LandUseController::class, 'update'])->name('update-landuse');
 
 Route::get('/about', function () {
     return view('about');

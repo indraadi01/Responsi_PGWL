@@ -118,7 +118,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="Fill point name">
+                                placeholder="Fill polygon name">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
@@ -245,8 +245,8 @@
         /* GeoJSON Polyline */
         var polyline = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                var popupContent = "Name: " + feature.properties.remark + "<br>" +
+                    "Description: " + feature.properties.lcode + "<br>" +
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>" +
 
@@ -266,7 +266,7 @@
                         polyline.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        polyline.bindTooltip(feature.properties.name);
+                        polyline.bindTooltip(feature.properties.remark);
                     },
                 });
             },
@@ -276,59 +276,11 @@
             map.addLayer(polyline);
         });
 
-        // Function to create popup content
-        function createPopupContent(feature) {
-            return " " + feature.properties.WADMKC;
-        }
-
-        // Function to style each feature
-        function style(feature) {
-            return {
-                fillColor: getRandomColor(),
-                weight: 1,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.5
-            };
-        }
-
-        // Function to generate random color
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        /* GeoJSON Polygon */
-        var polygons = L.geoJson(null, {
-            style: style, // Apply the style function here
-            onEachFeature: function(feature, layer) {
-                var popupContent = createPopupContent(feature);
-
-                layer.on({
-                    click: function(e) {
-                        layer.bindPopup(popupContent).openPopup(e.latlng);
-                    },
-
-                });
-            },
-        });
-
-        // Load GeoJSON data
-        $.getJSON("{{ asset('Admin.json') }}", function(data) {
-            polygons.addData(data);
-            map.addLayer(polygons);
-        });
-
-        /* GeoJSON Polygon */
+          /* GeoJSON Polygon */
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                var popupContent = "Name: " + feature.properties.remark + "<br>" +
+                    "Description: " + feature.properties.lcode + "<br>" +
                     "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>" +
 
@@ -348,7 +300,7 @@
                         polygon.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        polygon.bindTooltip(feature.properties.name);
+                        polygon.bindTooltip(feature.properties.remark);
                     },
                 });
             },
@@ -357,45 +309,60 @@
             polygon.addData(data);
             map.addLayer(polygon);
         });
-        /* GeoJSON LandUse */
-        var MergePL = L.geoJson(null, {
-            onEachFeature: function(feature, layer) {
-                var popupContent = "Name: " + feature.properties.remark + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
-                    "Photo: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>" +
 
-                    "<div class='d-flex flex-row mt-3'>" +
-                    "<a href='{{ url('edit-landuse') }}/" + feature.properties.id + "' class='btn btn-sm btn-warning me-2'><i class='fa-solid fa-edit'></i></a>" +
+        // // Function to create popup content
+        // function createPopupContent(feature) {
+        //     return " " + feature.properties.WADMKC;
+        // }
 
-                    "<form action='{{ url('delete-landuse') }}/" + feature.properties.id + "' method='POST'>" +
-                    '{{ csrf_field() }}' +
-                    '{{ method_field('DELETE') }}' +
+        // // Function to style each feature
+        // function style(feature) {
+        //     return {
+        //         fillColor: getRandomColor(),
+        //         weight: 1,
+        //         opacity: 1,
+        //         color: 'white',
+        //         dashArray: '3',
+        //         fillOpacity: 0.5
+        //     };
+        // }
 
-                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>" +
-                    "</div>";
+        // // Function to generate random color
+        // function getRandomColor() {
+        //     var letters = '0123456789ABCDEF';
+        //     var color = '#';
+        //     for (var i = 0; i < 6; i++) {
+        //         color += letters[Math.floor(Math.random() * 16)];
+        //     }
+        //     return color;
+        // }
 
-                layer.on({
-                    click: function(e) {
-                        MergePL.bindPopup(popupContent);
-                    },
-                    mouseover: function(e) {
-                        MergePL.bindTooltip(feature.properties.remark);
-                    },
-                });
-            },
-        });
-        $.getJSON("{{ route('api.landuse') }}", function(data) {
-            MergePL.addData(data);
-            map.addLayer(MergePL);
-        });
+        // /* GeoJSON Polygon */
+        // var polygons = L.geoJson(null, {
+        //     style: style, // Apply the style function here
+        //     onEachFeature: function(feature, layer) {
+        //         var popupContent = createPopupContent(feature);
+
+        //         layer.on({
+        //             click: function(e) {
+        //                 layer.bindPopup(popupContent).openPopup(e.latlng);
+        //             },
+
+        //         });
+        //     },
+        // });
+
+        // // Load GeoJSON data
+        // $.getJSON("{{ asset('Admin.json') }}", function(data) {
+        //     polygons.addData(data);
+        //     map.addLayer(polygons);
+        // });
 
         /* Layer Control */
         var overlayMaps = {
             "Points": point,
             "Polylines": polyline,
-            "Polygons": polygons,
+            "Polygons": polygon,
         };
         // var layerControl =
          // Add layer control to the map

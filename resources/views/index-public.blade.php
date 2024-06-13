@@ -56,8 +56,8 @@
         /* GeoJSON Polyline */
         var polyline = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Nama: " + feature.properties.name + "<br>" +
-                    "Deskripsi: " + feature.properties.description + "<br>" +
+                var popupContent = "Nama: " + feature.properties.remark + "<br>" +
+                    "Deskripsi: " + feature.properties.lcode + "<br>" +
                     "Foto: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>";
                 layer.on({
@@ -65,7 +65,7 @@
                         layer.bindPopup(popupContent).openPopup();
                     },
                     mouseover: function(e) {
-                        layer.bindTooltip(feature.properties.name).openTooltip();
+                        layer.bindTooltip(feature.properties.remark).openTooltip();
                     },
                 });
             },
@@ -78,8 +78,8 @@
         /* GeoJSON Polygon */
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-                var popupContent = "Nama: " + feature.properties.name + "<br>" +
-                    "Deskripsi: " + feature.properties.description + "<br>" +
+                var popupContent = "Nama: " + feature.properties.remark + "<br>" +
+                    "Deskripsi: " + feature.properties.lcode + "<br>" +
                     "Foto: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='img-thumbnail' alt='...'>" + "<br>";
 
@@ -88,7 +88,7 @@
                         layer.bindPopup(popupContent).openPopup();
                     },
                     mouseover: function(e) {
-                        layer.bindTooltip(feature.properties.name).openTooltip();
+                        layer.bindTooltip(feature.properties.remark).openTooltip();
                     },
                 });
             },
@@ -98,35 +98,11 @@
             map.addLayer(polygon);
         });
 
-        /* GeoJSON Landuse */
-        var landuse = L.geoJson(null, {
-            onEachFeature: function(feature, layer) {
-                var popupContent = "Nama: " + feature.properties.remark + "<br>" +
-                    "Deskripsi: " + feature.properties.description + "<br>" +
-                    "Foto: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>";
-
-                layer.on({
-                    click: function(e) {
-                        layer.bindPopup(popupContent).openPopup();
-                    },
-                    mouseover: function(e) {
-                        layer.bindTooltip(feature.properties.name).openTooltip();
-                    },
-                });
-            },
-        });
-        $.getJSON("{{ route('api.landuse') }}", function(data) {
-            landuse.addData(data);
-            map.addLayer(landuse);
-        });
-
         // Layer control
         var overlayMaps = {
             "Point": point,
             "Polyline": polyline,
-            "Polygon": polygon,
-            "Landuse": landuse
+            "Polygon": polygon
         };
         var layerControl = L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
     </script>

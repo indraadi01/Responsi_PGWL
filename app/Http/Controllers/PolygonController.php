@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Polygon;
 use Illuminate\Http\Request;
 
 class PolygonController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         $this->polygon = new Polygon();
     }
     /**
@@ -17,7 +15,7 @@ class PolygonController extends Controller
      */
     public function index()
     {
-        $polygons = $this->polygon->polygons();
+        $polygons =$this->polygon->polygons();
 
         foreach ($polygons as $p) {
             $feature[] = [
@@ -25,10 +23,10 @@ class PolygonController extends Controller
                 'geometry' => json_decode($p->geom),
                 'properties' => [
                     'id' => $p->id,
-                    'name' => $p->remark,
-                    'description' => $p->lcode,
+                    'remark' => $p->remark,
+                    'lcode' => $p->lcode,
                     'image' => $p->image,
-                    'shape_leng' => $p->shape_leng,
+                    'shape_area' => $p->shape_area,
                     'created_at' => $p->created_at,
                     'updated_at' => $p->updated_at
                 ]
@@ -55,45 +53,44 @@ class PolygonController extends Controller
     public function store(Request $request)
     {
         //validate request
-        $request->validate(
-            [
-                'remark' => 'required',
-                'lcode' => 'required',
-                'geom' => 'required',
-                'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
-            ],
-            [
-                'remark.required' => 'Name is required',
-                'lcode.required' => 'LCode is required',
-                'geom.required' => 'Location is required',
-                'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
-                'image.max' => 'The image may not be greater than 10MB.'
-            ]
-        );
-
-        //create folder images
-        if (!is_dir('storage/images')) {
-            mkdir('storage/images', 0777);
-        }
-
-        // upload image
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '_polygon.' . $image->getClientOriginalExtension();
-            $image->move('storage/images', $filename);
-        } else {
-            $filename = null;
-        }
-
-        $data = ([
-            'remark' => $request->remark,
-            'lcode' => $request->lcode,
-            'geom' => $request->geom,
-            'image' => $filename
+        $request->validate([
+            'remark' => 'required',
+            'lcode' => 'required',
+            'geom' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
+        ],
+        [
+            'remark.required' => 'Remark is required',
+            'lcode.required' => 'Lcode is required',
+            'geom.required' => 'Location is required',
+            'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
+            'image.max' => 'The image may not be greater than 10MB.'
         ]);
 
-        //Create polygon
-        if (!$this->polygon->create($data)) {
+       //create folder images
+       if (!is_dir('storage/images')) {
+        mkdir('storage/images', 0777);
+    }
+
+    // upload image
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $filename = time() . '_polygon.' . $image->getClientOriginalExtension();
+        $image->move('storage/images', $filename);
+    } else {
+        $filename = null;
+    }
+
+    $data = ([
+        'remark' => $request->remark,
+        'lcode' => $request->lcode,
+        'geom' => $request->geom,
+        'image' => $filename
+    ]);
+
+
+        //Create Polygon
+        if(!$this->polygon->create($data)){
             return redirect()->back()->with('error', 'Failed to create polygon');
         }
 
@@ -114,9 +111,10 @@ class PolygonController extends Controller
                 'geometry' => json_decode($p->geom),
                 'properties' => [
                     'id' => $p->id,
-                    'name' => $p->name,
-                    'description' => $p->description,
+                    'name' => $p->remark,
+                    'description' => $p->lcode,
                     'image' => $p->image,
+                    'shape_area' => $p->shape_area,
                     'created_at' => $p->created_at,
                     'updated_at' => $p->updated_at
                 ]
@@ -157,8 +155,8 @@ class PolygonController extends Controller
                 'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
             ],
             [
-                'remark.required' => 'Name is required',
-                'lcode.required' => 'LCode is required',
+                'remark.required' => 'Remark is required',
+                'lcode.required' => 'Lcode is required',
                 'geom.required' => 'Location is required',
                 'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
                 'image.max' => 'The image may not be greater than 10MB.'
@@ -179,6 +177,7 @@ class PolygonController extends Controller
             //delete image
             $image_old = $request->image_old;
             if ($image_old != null) {
+
             }
         } else {
             $filename = $request->image_old;
@@ -192,13 +191,13 @@ class PolygonController extends Controller
 
         ]);
 
-        //Update polygon
+        //Update Polygon
         if (!$this->polygon->find($id)->update($data)) {
             return redirect()->back()->with('error', 'Failed to update polygon');
         }
 
         //redirect to map
-        return redirect()->back()->with('success', 'polygon updated successfully');
+        return redirect()->back()->with('success', 'Polygon updated successfully');
     }
 
     /**
@@ -225,9 +224,8 @@ class PolygonController extends Controller
         return redirect()->back()->with('success', 'Polygon deleted successfully');
     }
 
-    public function table()
-    {
-        $polygons = $this->polygon->polygons();
+    public function table() {
+        $polygons= $this->polygon->polygons();
         $data = [
             'title' => 'Table Polygon',
             'polygons' => $polygons
