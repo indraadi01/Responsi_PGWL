@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LandUseController;
+// use App\Http\Controllers\LandUseController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\PolylineController;
 use App\Http\Controllers\PolygonController;
@@ -29,5 +29,6 @@ Route::get('/polylines', [PolylineController::class, 'index'])->name('api.polyli
 Route::get('/polyline/{id}', [PolylineController::class, 'show'])->name('api.polyline');
 Route::get('/polygons', [PolygonController::class, 'index'])->name('api.polygons');
 Route::get('/polygon/{id}', [PolygonController::class, 'show'])->name('api.polygon');
-Route::get('/landuse', [LandUseController::class, 'index'])->name('api.landuse');
-Route::get('/landusee/{id}', [LandUseController::class, 'show'])->name('api.landusee');
+// Route::get('/landuse', [LandUseController::class, 'index'])->name('api.landuse');
+// Route::get('/landusee/{id}', [LandUseController::class, 'show'])->name('api.landusee');
+

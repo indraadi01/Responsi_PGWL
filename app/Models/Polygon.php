@@ -16,11 +16,11 @@ class Polygon extends Model
 
     public function polygons()
     {
-        return $this->select(DB::raw('id, remark, lcode, ST_AsGeoJSON(geom) as geom, image, shape_area, created_at, updated_at'))->get();
+        return $this->select(DB::raw('id, remark, shape_area, lcode, ST_AsGeoJSON(geom) as geom, image,  created_at, updated_at'))->get();
     }
     public function polygon($id)
     {
-        return $this->select(DB::raw('id, remark, lcode, ST_AsGeoJSON(geom) as geom, image, shape_area, created_at, updated_at'))
+        return $this->select(DB::raw('id, remark, shape_area, lcode, ST_AsGeoJSON(geom) as geom, image,  created_at, updated_at'))
         -> where('id', $id)->get();
     }
 }

@@ -35,11 +35,11 @@
                         @method('PATCH')
                         <div class="mb-3">
                             <label for="remark" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="remark" name="remark" value="{{ $polylines->remark }}" placeholder="Fill polyline name">
+                            <input type="text" class="form-control" id="remark" name="remark" value="{{ $polyline->remark }}" placeholder="Fill polyline name">
                         </div>
                         <div class="mb-3">
                             <label for="lcode" class="form-label">Description</label>
-                            <textarea class="form-control" id="lcode" name="lcode" rows="3">{{ $polylines->lcode }}</textarea>
+                            <textarea class="form-control" id="lcode" name="lcode" rows="3">{{ $polyline->lcode }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="geom" class="form-label">Geometry</label>
@@ -111,8 +111,8 @@
 
                 var wkt = Terraformer.geojsonToWKT(geojson.geometry);
             // console.log(geojson); Mendebug keluaran data
-                $('#remark').val(layer.feature.properties.name);
-                $('#lcode').val(layer.feature.properties.description);
+                $('#remark').val(layer.feature.properties.remark);
+                $('#lcode').val(layer.feature.properties.lcode);
                 $('#geom_polyline').val(wkt);
                 $('#image_old').val(layer.feature.properties.image);
                 $('#preview-image-polyline').attr('src', '{{ asset('storage/images/') }}/' + layer.feature.properties.image);
@@ -129,8 +129,8 @@
                 //Add polyline layer
                 drawnItems.addLayer(layer);
 
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                var popupContent = "Name: " + feature.properties.remark + "<br>" +
+                    "Description: " + feature.properties.lcode + "<br>" +
                     "Photo: <br> <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='' alt='...' width='200'>";
 
@@ -140,7 +140,7 @@
                         polyline.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        polyline.bindTooltip(feature.properties.name);
+                        polyline.bindTooltip(feature.properties.remark);
                     },
                 });
             },

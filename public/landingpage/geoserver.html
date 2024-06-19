@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="DIVSIG UGM">
+    <meta name="description" content="leaflet basic">
+
+    <!-- Judul pada tab browser -->
+    <title>SISULI MAP</title>
+    <!-- <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script> -->
+
+    <!--leafleat Javascript Library-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Search CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-search/leaflet-search.css" />
+
+    <!-- Geolocation CSS Library for Plugin -->
+    <link rel="stylesheet"
+        href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css" />
+
+    <!-- Leaflet Mouse Position CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.css" />
+
+    <!-- Leaflet Measure CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-measure/leaflet-measure.css" />
+
+    <!-- EasyPrint CSS Library -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-easyprint/easyPrint.css" />
+
+    <!-- Marker Cluster -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-markercluster/MarkerCluster.css" />
+    <link rel="stylesheet" href="assets/plugins/leaflet-markercluster/MarkerCluster.Default.css" />
+
+    <!-- Routing -->
+    <link rel="stylesheet" href="assets/plugins/leaflet-routing/leaflet-routing-machine.css" />
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+<style>
+    #map {
+        height: 100vh;
+    }
+
+    *.info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .info h2 {
+        margin: 0 0 5px;
+        color: #777;
+    }
+
+    .header-inner-pages {
+        position: relative;
+        z-index: 1000;
+    }
+
+    #map {
+        height: 1000px;
+        position: relative;
+        z-index: 1;
+    }
+</style>
+</head>
+
+<body>
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+    <!-- Search JavaScript Library -->
+    <script src="assets/plugins/leaflet-search/leaflet-search.js"></script>
+
+    <!-- Geolocation Javascript Library -->
+    <script
+        src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+
+    <!-- Leaflet Mouse Position JavaScript Library -->
+    <script src="assets/plugins/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+
+    <!-- Leaflet Measure JavaScript Library -->
+    <script src="assets/plugins/leaflet-measure/leaflet-measure.js"></script>
+
+    <!-- EasyPrint JavaScript Library -->
+    <script src="assets/plugins/leaflet-easyprint/leaflet.easyPrint.js"></script>
+
+    <!-- Marker Cluster -->
+    <script src="assets/plugins/leaflet-markercluster/leaflet.markercluster.js"></script>
+    <script src="assets/plugins/leaflet-markercluster/leaflet.markercluster-src.js"></script>
+
+    <!-- Routing -->
+    <script src="assets/plugins/leaflet-routing/leaflet-routing-machine.js"></script>
+
+    <header id="header" class="header-inner-pages">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <h1 class="logo"><a href="index.html">SISULI</a></h1>
+            <!-- .navbar -->
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="index.html">Home</a></li>
+                    <li><a class="nav-link scrollto active" href="geoserver.html">Go to Map</a></li>
+                    <li class="dropdown"><a href="#"><span>Statistik</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="sapi1922.html">Populasi Sapi Perah Tahun 2019 - 2022</a></li>
+                            <li><a href="#">Populasi Kambing Tahun 2019 - 2022</a></li>
+                            <li><a href="sapikecamatan.html">Populasi Sapi Perah Tahun Menurut Kecamatan</a></li>
+                            <li><a href="kambingkecamatan.html">Populasi KambingTahun Menurut Kecamatan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
+    <div id="map"></div>
+    <script>
+        /* Deklarasi Map */
+        var map = L.map('map').setView([-7.431775955313597, 110.68835424188985], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        /* Judul dan Subjudul */
+        var title = new L.Control();
+        title.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        title.update = function () {
+            this._div.innerHTML = '<h2>SISULI | Persebaran Sebagian Lokasi Peternakan Kambing dan Sapi di Kabupaten Boyolali</h2>RESPONSI PEMROGRAMAN GEOSPASIAL : WEB'
+        };
+        title.addTo(map);
+
+        /* Tile Basemap */
+        var basemap1 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href="geoserver.html" target="_blank">DIVSIG UGM</a>' //menambahkan nama//
+        });
+        var basemap2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{ z } / { y } / { x }',
+            {
+                attribution: 'Tiles &copy; Esri | <a href="geoserver.html" target="_blank">DIVSIG UGM</a>'
+            });
+        var basemap3 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{ z } / { y } / { x }',
+            {
+                attribution: 'Tiles &copy; Esri | <a href="geoserver.html" target="_blank">DIVSIG UGM</a>'
+            });
+        var basemap4 = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptile s.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+        basemap1.addTo(map);
+
+        //data poligon
+        var boyolali = new L.GeoJSON.AJAX("Admin_Boyolali.geojson", {
+            style: function (feature) {
+                if ((feature.properties.WADMKC)) {
+                    return {
+                        opacity: 2,
+                        color: "black",
+                        weight: 0.5,
+                        fillOpacity: 0.2,
+                        fillColor: "#FFA500",
+                    };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+                var content = "KECAMATAN: " + feature.properties.WADMKC;
+
+                layer.on({
+                    click: function (e) {
+                        boyolali.bindPopup(content);
+                    },
+                    mouseover: function (e) {
+                        var layer = e.target;
+                        layer.setStyle({
+                            color: "black",
+                            weight: 0.2,
+                            opacity: 1,
+                            fillColor: "cyan",
+                            fillOpacity: 0.7,
+                        });
+                        boyolali.bindPopup("Kecamatan " + feature.properties.WADMKC, { sticky: false });
+                    },
+                    mouseout: function (e) {
+                        boyolali.resetStyle(e.target);
+                        map.closePopup();
+                    },
+                });
+            },
+        }).addTo(map);
+
+        // Ambil data marker dari PHP
+        fetch('data.php')
+            .then(response => response.json())
+            .then(markers => {
+                markers.forEach(marker => {
+                    var latlng = [parseFloat(marker.latitude), parseFloat(marker.longitude)];
+                    var icon;
+                    var color;
+
+                    if (marker.jenis === 'Peternakan Sapi') {
+                        icon = L.icon({
+                            iconUrl: 'https://github.com/pointhi/leaflet-color-markers/blob/master/img/marker-icon-2x-red.png?raw=true',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+                        color = 'red';
+                    } else if (marker.jenis === 'Peternakan Kambing') {
+                        icon = L.icon({
+                            iconUrl: 'https://github.com/pointhi/leaflet-color-markers/blob/master/img/marker-icon-2x-green.png?raw=true',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+                        color = 'green';
+                    } else {
+                        icon = L.icon({
+                            iconUrl: 'https://github.com/pointhi/leaflet-color-markers/blob/master/img/marker-icon-2x-blue.png?raw=true',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        });
+                        color = 'blue';
+                    }
+                    // Pop Up Marker 
+                    var popupContent =
+                        `<strong>Nama Peternakan:</strong> ${marker.nama_lokasi}<br>` +
+                        `<strong>Jenis Peternakan:</strong> ${marker.jenis}<br>` +
+                        `<strong>Latitude:</strong> ${marker.latitude}<br>` +
+                        `<strong>Longitude:</strong> ${marker.longitude}<br>` +
+                        `<a href="https://www.google.com/maps/dir/?api=1&destination=${marker.latitude},${marker.longitude}" target="_blank">Get Directions</a>`;
+
+                    L.marker(latlng, { icon: icon })
+                        .addTo(map)
+                        .bindPopup(popupContent)
+                        .openPopup();
+                });
+
+                //GeoJSON layer for polygon data
+                var wfsgeoserver2 = L.geoJson(null, {
+                    style: function (feature) {
+                        // Adjust this function to define styles based on your polygon properties
+                        var value = feature.properties.WADMKC; // Change this to your actual property name
+                        return {
+                            fillColor: getColor(value),
+                            weight: 2,
+                            opacity: 1,
+                            color: "BLUE",
+                            dashArray: "3",
+                            fillOpacity: 0.7,
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        var content = "Kecamatan : " + feature.properties.WADMKC + "<br>"
+                        layer.on({
+                            click: function (e) {
+                                wfsgeoserver2.bindPopup(content);
+                            },
+                            mouseover: function (e) {
+                                wfsgeoserver2.bindTooltip(feature.properties.WADMKC);
+                            },
+                            mouseout: function (e) {
+                                wfsgeoserver2.closePopup();
+                            }
+                        });
+                    }
+                });
+
+                $.getJSON("wfsgeoserver2.php", function (data) {
+                    wfsgeoserver2.addData(data);
+                    map.addLayer(wfsgeoserver2);
+                    // map.fitBounds(wfsgeoserver2.getBounds());
+                });
+
+                /* Image Watermark */
+                L.Control.Watermark = L.Control.extend({
+                    onAdd: function (map) {
+                        var img = L.DomUtil.create("img");
+                        img.src = "assets/img/logo/LOGO_SIG_BLUE.png";
+                        img.style.width = "200px";
+                        return img;
+                    },
+                });
+
+                L.control.watermark = function (opts) {
+                    return new L.Control.Watermark(opts);
+                };
+
+                L.control.watermark({ position: "bottomleft" }).addTo(map);
+
+                /* Image Legend */
+                L.Control.Legend = L.Control.extend({
+                    onAdd: function (map) {
+                        var img = L.DomUtil.create('img');
+                        img.src = 'assets/img/legend/legenda_.png';
+                        img.style.width = '200px';
+                        return img;
+                    }
+                });
+                L.control.Legend = function (opts) {
+                    return new L.Control.Legend(opts);
+                }
+                L.control.Legend({ position: 'topright' }).addTo(map);
+
+                /*Plugin Search */
+                var searchControl = new L.Control.Search({
+                    position: "topleft",
+                    layer: adminboyolali, //Nama variabel layer
+                    propertyName: "WADMKC", //Field untuk pencarian
+                    marker: false,
+                    moveToLocation: function (latlng, title, map) {
+                        var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+                        map.setView(latlng, zoom);
+                    },
+                });
+                searchControl
+                    .on("search:locationfound", function (e) {
+                        e.layer.setStyle({
+                            fillColor: "#ffff00",
+                            color: "#0000ff",
+                        });
+                    })
+                    .on("search:collapse", function (e) {
+                        featuresLayer.eachLayer(function (layer) {
+                            featuresLayer.resetStyle(layer);
+                        });
+                    });
+                map.addControl(searchControl);
+
+                /*Plugin Geolocation */
+                var locateControl = L.control
+                    .locate({
+                        position: "topleft",
+                        drawCircle: true,
+                        follow: true,
+                        setView: true,
+                        keepCurrentZoomLevel: false,
+                        markerStyle: {
+                            weight: 1,
+                            opacity: 0.8,
+                            fillOpacity: 0.8,
+                        },
+                        circleStyle: {
+                            weight: 1,
+                            clickable: false,
+                        },
+                        icon: "fas fa-crosshairs",
+                        metric: true,
+                        strings: {
+                            title: "Click for Your Location",
+                            popup: "You're here. Accuracy {distance} {unit}",
+                            outsideMapBoundsMsg: "Not available",
+                        },
+                        locateOptions: {
+                            maxZoom: 16,
+                            watch: true,
+                            enableHighAccuracy: true,
+                            maximumAge: 10000,
+                            timeout: 10000,
+                        },
+                    })
+                    .addTo(map);
+
+                /*Plugin Mouse Position Coordinate */
+                L.control.mousePosition({ position: "topleft", separator: ",", prefix: "Point Coodinate: " }).addTo(map);
+
+                /*Plugin Measurement Tool */
+                var measureControl = new L.Control.Measure({
+                    position: "topleft",
+                    primaryLengthUnit: "meters",
+                    secondaryLengthUnit: "kilometers",
+                    primaryAreaUnit: "hectares",
+                    secondaryAreaUnit: "sqmeters",
+                    activeColor: "#FF0000",
+                    completedColor: "#00FF00",
+                });
+                measureControl.addTo(map);
+
+                /*Plugin EasyPrint */
+                L.easyPrint({
+                    title: "Print",
+                }).addTo(map);
+
+                // Membuat ikon marker dengan warna kuning
+                var yellowIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                // Menyesuaikan opsi ikon pada plugin Routing
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(-7.7969, 110.3715),
+                        L.latLng(-7.7969, 110.3715)
+                    ],
+                    routeWhileDragging: true,
+                    createMarker: function (i, waypoint, n) {
+                        var marker = L.marker(waypoint.latLng, {
+                            draggable: true,
+                            icon: yellowIcon  // Menggunakan ikon warna kuning yang telah dibuat
+                        });
+
+                        if (i === 0 || i === n - 1) {
+                            marker.bindPopup('Waypoint ' + (i + 1)).openPopup();
+                        }
+
+                        marker.on('dragend', function (event) {
+                            // Handle dragend event
+                        });
+
+                        return marker;
+                    }
+                }).addTo(map);
+
+                /*Layer Marker*/
+                var addressPoints = [
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ];
+
+                var markers = L.markerClusterGroup();
+
+                for (var i = 0; i < addressPoints.length; i++) {
+                    var a = addressPoints[i];
+                    var title1 = a[2];
+
+                    var redIcon = L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    });
+
+                    var marker = L.marker(new L.LatLng(a[0], a[1]), {
+                        title: title1,
+                        icon: redIcon
+                    });
+
+                    marker.bindPopup(title1);
+                    markers.addLayer(marker);
+                }
+                map.addLayer(markers);
+            });
+
+    </script>
+</body>
+
+</html>

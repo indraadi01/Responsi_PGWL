@@ -111,8 +111,8 @@
 
                 var wkt = Terraformer.geojsonToWKT(geojson.geometry);
             // console.log(geojson); Mendebug keluaran data
-                $('#remark').val(layer.feature.properties.name);
-                $('#lcode').val(layer.feature.properties.description);
+                $('#remark').val(layer.feature.properties.remark);
+                $('#lcode').val(layer.feature.properties.lcode);
                 $('#geom_Polygon').val(wkt);
                 $('#image_old').val(layer.feature.properties.image);
                 $('#preview-image-Polygon').attr('src', '{{ asset('storage/images/') }}/' + layer.feature.properties.image);
@@ -129,8 +129,8 @@
                 //Add Polygon layer
                 drawnItems.addLayer(layer);
 
-                var popupContent = "Name: " + feature.properties.name + "<br>" +
-                    "Description: " + feature.properties.description + "<br>" +
+                var popupContent = "Name: " + feature.properties.remark + "<br>" +
+                    "Description: " + feature.properties.lcode + "<br>" +
                     "Photo: <br> <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
                     "' class='' alt='...' width='200'>";
                     ;
@@ -139,7 +139,7 @@
                         Polygon.bindPopup(popupContent);
                     },
                     mouseover: function(e) {
-                        Polygon.bindTooltip(feature.properties.name);
+                        Polygon.bindTooltip(feature.properties.remark);
                     },
                 });
             },

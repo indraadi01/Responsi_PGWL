@@ -55,13 +55,11 @@ class PolygonController extends Controller
         //validate request
         $request->validate([
             'remark' => 'required',
-            'lcode' => 'required',
             'geom' => 'required',
             'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
         ],
         [
             'remark.required' => 'Remark is required',
-            'lcode.required' => 'Lcode is required',
             'geom.required' => 'Location is required',
             'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
             'image.max' => 'The image may not be greater than 10MB.'
@@ -83,7 +81,7 @@ class PolygonController extends Controller
 
     $data = ([
         'remark' => $request->remark,
-        'lcode' => $request->lcode,
+        'description' => $request->lcode,
         'geom' => $request->geom,
         'image' => $filename
     ]);
@@ -111,7 +109,7 @@ class PolygonController extends Controller
                 'geometry' => json_decode($p->geom),
                 'properties' => [
                     'id' => $p->id,
-                    'name' => $p->remark,
+                    'remark' => $p->remark,
                     'description' => $p->lcode,
                     'image' => $p->image,
                     'shape_area' => $p->shape_area,
@@ -150,13 +148,11 @@ class PolygonController extends Controller
         $request->validate(
             [
                 'remark' => 'required',
-                'lcode' => 'required',
                 'geom' => 'required',
                 'image' => 'mimes:jpeg,png,jpg,tiff,gif,svg|max:10000' //10MB
             ],
             [
                 'remark.required' => 'Remark is required',
-                'lcode.required' => 'Lcode is required',
                 'geom.required' => 'Location is required',
                 'image.mimes' => 'The image must be a file of type: jpeg,png,jpg,tiff,gif,svg',
                 'image.max' => 'The image may not be greater than 10MB.'

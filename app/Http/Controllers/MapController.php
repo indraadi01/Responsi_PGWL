@@ -19,6 +19,15 @@ class MapController extends Controller
             return view('index-public', $data);
         }
     }
+    public function landingpage()
+    {
+        $data = [
+            "title" => "Indra's Map",
+        ];
+
+            return view('landing', $data);
+
+    }
     public function table()
     {
         $data = [

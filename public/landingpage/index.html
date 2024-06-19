@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SISULI</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+  <link href="assets/img/tab-browser.jpg" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .hero {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    }
+    .header-inner-pages {
+      height: 120px;
+    }
+
+    .header-inner-pages .container {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .card {
+      width: 48%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    body {
+      background-color: #000000;
+      color: white;
+    }
+
+    .container {
+      padding: 50px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    h3 {
+      color: #FFD700;
+    }
+
+    p {
+      text-align: justify;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .img-fluid {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .img-fluid:hover {
+      transform: scale(1.1);
+    }
+
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .btn-back-to-top:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function showNotification() {
+      alert("Untuk akses peta silahkan pakai tombol 'Go to Map'!");
+    }
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</head>
+
+<body>
+<!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url(assets/img/pkl2.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animated fadeInDown">Selamat Datang<span></span></h2>
+              <h2 class="animated fadeInDown"><i>Pekalongan City Planner</i><span></span></h2>
+              <br class="animated fadeInUp text-center">Kota Pekalongan merupakan salah satu kota di Jawa Tengah yang terletak di
+                sisi Utara Pulau Jawa. <br> Kota Pekalongan secara administratif terbagi menjadi 4 Kecamatan yakni Kecamatan Pekalongan Utara,
+                Kecamatan Pekalongan Selatan, Kecamatan Pekalongan Timur, dan Kecamatan Pekalongan Barat.</br> </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-image: url(assets/img/pkl3.jpg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animated fadeInDown">Apa Itu <i>Pekalongan City Planner</i> ??</h2>
+              <br class="animated fadeInUp text-center"><i>Pekalongan City Planner</i> adalah sebuah website berbasis ilmu GIS / SIG yang dikembangkan dari latar belakang
+                keilmuan Sistem Informasi Geografis. <br> Informasi di dalam website ini menampilkan fitur geografis secara digital yang dilengkapi atribut data seputar Penggunaan Lahan Kota Pekalongan.
+                <br>Website ini terdapat penggunaan hak istimewa pengguna sehingga hanya pengguna yang terdaftar dapat melakukan <i>editing</i> fitur di dalamnya.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-image: url(assets/img/pkl1.jpeg)">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animated fadeInDown">Kenapa <i>Pekalongan City Planner</i> ??</h2>
+              <br class="animated fadeInUp text-center">Fenomena Urban Transformation akan selalu menjadi topik menarik yang terus ada dan selalu berkembang setiap periode waktu.
+              <br> Pendataan, pemantauan, hingga pemodelan akan fenomena ini perlu diperhatikan karena terkait dengan pemangku kebijakan untuk pengambilan keputusan.
+              Parameter utama yang akan ditekankan pada website ini mengacu pada Kepadatan Bangunan, Ketersediaan Lahan, serta Sebaran Fasilitas Umum.
+              </p>
+
+              <a href="http://localhost:8000/login" class="btn-get-started animated fadeInUp scrollto">Daftar/Masuk Disini</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      </a>
+
+    </div>
+  </section><!-- End Hero -->
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

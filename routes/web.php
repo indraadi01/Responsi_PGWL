@@ -7,6 +7,7 @@ use App\Http\Controllers\PointController;
 use App\Http\Controllers\PolylineController;
 use App\Http\Controllers\PolygonController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\LandUseController;
 use App\Models\LandUse;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -22,7 +23,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/',[MapController::class, 'index'])->name('index');
+Route::get('/',[MapController::class, 'landingpage'])->name('landingpage');
+Route::get('/map',[MapController::class, 'index'])->name('index');
 Route::get('/table',[MapController::class, 'table'])->name('table');
 Route::get('/landing',[LandingController::class, 'landing'])->name('landing');
 
@@ -72,7 +74,6 @@ Route::get('/table-polyline', [PolylineController::class, 'table'])->name('table
 
 //table
 Route::get('/table-polygon', [PolygonController::class, 'table'])->name('table-polygon');
-//table
-Route::get('/table-landuse', [LandUseController::class, 'table'])->name('table-landuse');
+
 
 require __DIR__.'/auth.php';

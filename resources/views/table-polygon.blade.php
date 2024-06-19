@@ -35,6 +35,8 @@
                 </td>
                 <td>{{ $p->shape_area }}</td>
                 {{-- <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }}</td> --}}
+                <td>{{ $p->created_at }}</td>
+                <td>{{ $p->updated_at }}</td>
             </tr>
         @endforeach
         </tbody>

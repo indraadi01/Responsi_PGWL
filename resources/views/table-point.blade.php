@@ -35,6 +35,8 @@
                     <img src="{{ asset('storage/images/' . $p->image) }}" alt="" width="200">
                 </td>
                 {{-- <td>{{ date_format($p->created_at, 'D, d M Y, H:i:s') }}</td> --}}
+                <td>{{ $p->created_at }}</td>
+                <td>{{ $p->updated_at }}</td>
             </tr>
         @endforeach
         </tbody>

@@ -110,8 +110,8 @@
         var wkt = Terraformer.geojsonToWKT(geojson.geometry);
 
         // Set the form fields with existing data
-        $('#remark').val(layer.feature.properties.name);
-        $('#lcode').val(layer.feature.properties.description);
+        $('#name').val(layer.feature.properties.name);
+        $('#description').val(layer.feature.properties.description);
         $('#geom_point').val(wkt);
         $('#image_old').val(layer.feature.properties.image);
         $('#preview-image-point').attr('src', '{{ asset('storage/images') }}/' + layer.feature.properties.image);
@@ -125,8 +125,8 @@
 
             drawnItems.addLayer(layer);
 
-            var popupContent = "Nama: " + feature.properties.remark + "<br>" +
-                "Deskripsi: " + feature.properties.lcode + "<br>" +
+            var popupContent = "Nama: " + feature.properties.name + "<br>" +
+                "Deskripsi: " + feature.properties.description + "<br>" +
                 "Foto: <img src='{{ asset('storage/images') }}/" + feature.properties.image +
                 "' class='img-thumbnail' alt='' width='200'>"
 

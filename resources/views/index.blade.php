@@ -116,8 +116,8 @@
                     <form action="{{ route('store-polygon') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <label for="remark" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="remark" name="remark"
                                 placeholder="Fill polygon name">
                         </div>
                         <div class="mb-3">

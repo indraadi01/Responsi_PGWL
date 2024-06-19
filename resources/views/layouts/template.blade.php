@@ -88,9 +88,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p> Nama : M. Indra Adi Kusuma</p>
+          <p><i>Pekalongan City Planner</i></p>
+          <p> Dibuat Oleh : M. Indra Adi Kusuma</p>
           <p> NIM : 22/504256/SV/21614</p>
-          <p> Kelas : B</p>
+          <p> Prodi : Sistem Informasi Geografis || SV UGM</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

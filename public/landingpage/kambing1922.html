@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Statistik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.42.0/apexcharts.min.css"
+        integrity="sha512-nnNXPeQKvNOEUd+TrFbofWwHT0ezcZiFU5E/Lv2+JlZCQwQ/ACM33FxPoQ6ZEFNnERrTho8lF0MCEH9DBZ/wWw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .nav-item {
+            position: relative;
+            top: 60px;
+            right: 10px;
+            left: 10px;
+            margin: 10px;
+        }
+
+        .card {
+            margin-top: 70px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top header-inner-pages">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <h1 class="logo"><a href="index.html">SISULI</a></h1>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="index.html">Home</a></li>
+                    <li><a class="nav-link scrollto" href="geoserver.html">Go to Map</a></li>
+                    <li class="dropdown scrollto active">
+                        <a href="#"><span>Statistik</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="sapi1922.html">Populasi Sapi Perah Tahun 2016 - 2022</a></li>
+                            <li><a href="kambing1922.html">Populasi Kambing Tahun 2016 - 2022</a></li>
+                            <li><a href="sapikecamatan.html">Populasi Sapi Perah Tahun Menurut Kecamatan</a></li>
+                            <li><a href="kambingkecamatan.html">Populasi KambingTahun Menurut Kecamatan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <div class="container mt-10">
+        <!-- Move .nav-item here -->
+        <li class="nav-item">
+            <a class="nav-link " aria-disabled="true" data-bs-toggle="modal" data-bs-target="#infoModal"><i
+                    class="fa-solid fa-circle-info"></i> Info</a>
+        </li>
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Populasi Kambing Tahun 2016 - 2022</h4>
+            </div>
+            <div class="card-body">
+                <div id="chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-circle-info"></i> Info
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Reminder : Data yang ditampilkan langsung berasal dari website BPS Kabupaten Boyolali.
+                        Jika terdapat data yang bernilai 0 merupakan data yang tidak memiliki nilai dari sumber data,
+                        baik hilang atau rusak.
+                    </p>
+                    <p>Sumber Data : <a
+                            href="https://boyolalikab.bps.go.id/indicator/24/92/1/populasi-ternak-menurut-kecamatan-dan-jenis-ternak-di-kabupaten-boyolali.html"
+                            target="_blank">https://boyolalikab.bps.go.id/</a></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.42.0/apexcharts.min.js"
+        integrity="sha512-HctQcT5hnI/elQck4950pvd50RuDnjCSGSoHI8CNyQIYVxsUoyJ+gSQIOrll4oM/Z7Kfi7WCLMIbJbiwYHFCpA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>var options = {
+            series: [{
+                name: "Populasi",
+                data: [89.809, 94.392, 95.428, 101.418, 101.527, 91.851]
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: ['2016', '2017', '2018', '2019', '2020', '2022'],
+                title: {
+                    text: 'Tahun'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'Ekor'
+                }
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " Ekor"
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();</script>
+</body>
+
+</html>
